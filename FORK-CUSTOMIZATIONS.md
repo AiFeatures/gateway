@@ -1,6 +1,6 @@
 # Fork Customizations
 
-> This repository is a fork of [unknown]().
+> This repository is a fork of [Portkey-AI/gateway](https://github.com/Portkey-AI/gateway).
 > Managed under the [iAiFy Enterprise](https://github.com/enterprises/iAiFy) governance model.
 
 ## Purpose
@@ -11,7 +11,7 @@ A blazing fast AI Gateway with integrated guardrails. Route to 200+ LLMs, 50+ AI
 
 | Property | Value |
 |----------|-------|
-| Upstream | [unknown]() |
+| Upstream | [Portkey-AI/gateway](https://github.com/Portkey-AI/gateway) |
 | Language | TypeScript |
 | Fork org | AiFeatures |
 
