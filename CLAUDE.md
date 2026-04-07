@@ -90,3 +90,9 @@ Tests are organized by component:
 The gateway uses `conf.json` for runtime configuration. Sample config available in `conf_sample.json`.
 
 Key environment variables and configuration handled through Hono's adapter system for multi-environment deployment.
+## AgentHub
+- Central hub: `~/AgentHub/`
+- Skills: `.agents/skills/` (symlinked to AgentHub shared skills)
+- MCP: 12 servers synced across all agents
+- Agents: 14 shared agents available
+- Hooks: Safety, notification, and logging hooks
