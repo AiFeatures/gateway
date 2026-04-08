@@ -93,3 +93,54 @@ and the [Fork Upstream Merge Runbook](https://github.com/Ai-road-4-You/governanc
 - **Owner**: @ashsolei
 - **Last reviewed**: 2026-04-08
 - **Reference runbook**: `ai-road-4-you/governance/docs/runbooks/fork-upstream-merge.md`
+
+## Living Maintenance Guide (Wave 4 P1)
+
+This section turns this document into a living maintenance guide for the
+gateway fork. It is the canonical entry point for anyone reasoning about
+fork drift, weekly sync, or plugin/patch ownership.
+
+### Weekly sync cadence (Mondays)
+
+1. `git fetch upstream && git log --oneline HEAD..upstream/main | head -50`
+   to inspect new upstream commits.
+2. Open a sync PR: branch `chore/upstream-sync-YYYY-MM-DD`, body lists
+   commit count and risk classification (`green` / `yellow` / `red`).
+3. Resolve conflicts using the file-policy table in the runbook above.
+   Preserve `.github/`, `CLAUDE.md`, `FORK-CUSTOMIZATIONS.md`, plugin
+   overrides, and any local Dockerfile changes; accept upstream for
+   provider source files unless flagged below.
+4. After merge, update **Last reviewed** in this file and re-run
+   `npm run test:gateway && npm run test:plugins`.
+
+### Patch ownership table
+
+Every long-lived patch in `patches/` and every plugin override must be
+listed here with owner + rationale. Items not on this list are subject
+to removal during the next sync.
+
+| Path | Owner | Rationale | Upstream link |
+|---|---|---|---|
+| `patches/` (none currently) | n/a | no carried patches at this time | n/a |
+| `plugins/portkey/` overrides | @ashsolei | local guardrail tuning for iAiFy presets | n/a (local-only) |
+| `AGENT-HUB-COUPLING.md` | @ashsolei | documents agent-hub integration contract | n/a (local-only) |
+
+When you add or remove a patch, update this table in the same PR.
+
+### Risk classification cheatsheet
+
+- **green** — dependency bumps, doc-only changes, new providers we don't
+  use. Auto-mergeable after CI passes.
+- **yellow** — provider behaviour changes, new middleware, plugin API
+  changes. Require one human review and a manual smoke run.
+- **red** — auth/permission/security changes, breaking API removals.
+  Require @ashsolei review and an explicit rollback plan in the PR body.
+
+### Rollback
+
+If a sync regresses production:
+
+1. `git revert -m 1 <merge-sha>` on `main` and re-deploy.
+2. Open an issue tagged `fork-sync-rollback` documenting the regression.
+3. Re-attempt the sync in a feature branch with the offending commits
+   reverted individually before merging back.
