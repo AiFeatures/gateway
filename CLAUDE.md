@@ -48,7 +48,6 @@ This is the **Portkey AI Gateway** - a fast, reliable AI gateway that routes req
 - `hooks` - Pre/post request hooks
 - `memoryCache` - Response caching
 - `logger` - Request/response logging
-- `adminAuth` - Node-only local UI session auth for `/public/*` login endpoints and `/log/stream`
 - `portkey` - Core Portkey-specific middleware for routing, guardrails, etc.
 
 **Plugin System (`plugins/`)**
@@ -90,6 +89,10 @@ Tests are organized by component:
 
 The gateway uses `conf.json` for runtime configuration. Sample config available in `conf_sample.json`.
 
-For local UI hardening, set `admin_token` in `conf.json`. The `/public` UI uses this token to establish an in-memory admin session, and `/log/stream` requires that session.
-
 Key environment variables and configuration handled through Hono's adapter system for multi-environment deployment.
+## AgentHub
+- Central hub: `~/AgentHub/`
+- Skills: `.agents/skills/` (symlinked to AgentHub shared skills)
+- MCP: 12 servers synced across all agents
+- Agents: 14 shared agents available
+- Hooks: Safety, notification, and logging hooks
