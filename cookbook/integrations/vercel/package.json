@@ -9,15 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.66",
-    "@portkey-ai/vercel-provider": "^1.0.1",
+    "@ai-sdk/openai": "^4.0.36",
+    "@portkey-ai/vercel-provider": "^2.1.0",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-slot": "^1.2.4",
     "ai": "^3.4.33",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.366.0",
-    "nanoid": "^5.1.6",
+    "nanoid": "^5.1.16",
     "next": "~15.5.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
